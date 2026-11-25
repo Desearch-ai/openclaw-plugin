@@ -1,0 +1,21 @@
+{
+  "id": "desearch-web-search",
+  "name": "Desearch Web Search",
+  "description": "Use Desearch for OpenClaw web_search through the Desearch MCP service.",
+  "categories": ["web"],
+  "activation": { "onStartup": false },
+  "contracts": { "webSearchProviders": ["desearch"] },
+  "setup": { "providers": [{ "id": "desearch", "envVars": ["DESEARCH_API_KEY"] }] },
+  "uiHints": {
+    "webSearch.apiKey": { "label": "Desearch API key", "sensitive": true, "help": "Fallback: DESEARCH_API_KEY in the Gateway environment." }
+  },
+  "configSchema": {
+    "type": "object", "additionalProperties": false,
+    "properties": {
+      "webSearch": {
+        "type": "object", "additionalProperties": false,
+        "properties": { "apiKey": { "type": "string" } }
+      }
+    }
+  }
+}

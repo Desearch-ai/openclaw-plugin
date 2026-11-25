@@ -1,0 +1,27 @@
+{
+  "name": "@desearch/openclaw-plugin",
+  "version": "0.1.0",
+  "description": "Desearch web_search provider for OpenClaw, backed by the Desearch MCP service.",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://desearch.ai",
+  "bugs": { "url": "https://github.com/Desearch-ai/mcp-desearch/issues" },
+  "files": ["dist", "openclaw.plugin.json", "README.md", "LICENSE", "CHANGELOG.md"],
+  "engines": { "node": ">=24.22.1 <25 || >=26.12.1" },
+  "publishConfig": { "access": "public" },
+  "keywords": ["openclaw", "openclaw-plugin", "desearch", "web-search", "mcp"],
+  "scripts": {
+    "build": "tsc",
+    "lint": "tsc --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": { "@modelcontextprotocol/sdk": "1.32.2", "typebox": "1.4.3" },
+  "peerDependencies": { "openclaw": "2026.11.10" },
+  "devDependencies": { "@types/node": "24.10.1", "typescript": "5.9.3" },
+  "openclaw": {
+    "extensions": ["./dist/index.js"],
+    "compat": { "pluginApi": "2026.11.10", "minGatewayVersion": "2026.11.10" },
+    "build": { "openclawVersion": "2026.11.10", "pluginSdkVersion": "2026.11.10" }
+  }
+}

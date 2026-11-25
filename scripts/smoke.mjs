@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import { randomBytes } from 'node:crypto';
+import { createDesearchProvider } from '../dist/index.js';
+import { search } from '../dist/search.js';
+if (!process.env.DESEARCH_API_KEY) throw new Error('DESEARCH_API_KEY is required.');
+const tool = createDesearchProvider().createTool({});
+const output = await tool.execute({ query: 'OpenClaw plugin SDK documentation', count: 3 });
+assert.equal(output.kind, 'results', 'Authenticated search must succeed.');
+assert.ok(output.results.length > 0, 'Authenticated search must return results.');
+assert.ok(!JSON.stringify(output).includes(process.env.DESEARCH_API_KEY));
+console.log(JSON.stringify({ check: 'authenticated-provider-search', output }, null, 2));
+const canary = randomBytes(32).toString('hex');
+const rejected = await search({ query: 'OpenClaw plugin SDK documentation', count: 1 }, canary);
+assert.equal(rejected.kind, 'error', 'Invalid key must be rejected.');
+assert.ok(!JSON.stringify(rejected).includes(canary));
+console.log(JSON.stringify({ check: 'invalid-auth-canary-redacted', output: rejected }, null, 2));
