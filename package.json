@@ -1,5 +1,5 @@
 {
-  "name": "@desearch/openclaw-plugin",
+  "name": "@desearch-ai/openclaw-plugin",
   "version": "0.1.0",
   "description": "Desearch web_search provider for OpenClaw, backed by the Desearch MCP service.",
   "type": "module",

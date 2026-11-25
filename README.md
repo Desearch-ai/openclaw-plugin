@@ -13,11 +13,11 @@ Use Desearch as OpenClaw's `web_search` provider. This plugin forwards searches 
 After the package is published, install the exact version from either registry:
 
 ```sh
-openclaw plugins install npm:@desearch/openclaw-plugin@0.1.0 --accept-capabilities
+openclaw plugins install npm:@desearch-ai/openclaw-plugin@0.1.0 --accept-capabilities
 ```
 
 ```sh
-openclaw plugins install clawhub:@desearch/openclaw-plugin@0.1.0 --accept-capabilities
+openclaw plugins install clawhub:@desearch-ai/openclaw-plugin@0.1.0 --accept-capabilities
 ```
 
 For a local reviewed tarball:
@@ -86,9 +86,9 @@ Validate the package with ClawHub CLI 0.27.0 before publishing. Set `SOURCE_REPO
 
 ```sh
 clawhub package validate .
-clawhub package publish ../artifacts/desearch-openclaw-plugin-0.1.0.tgz --family code-plugin --owner desearch --source-repo "$SOURCE_REPO" --source-commit "$SOURCE_COMMIT" --dry-run
+clawhub package publish ../artifacts/desearch-openclaw-plugin-0.1.0.tgz --family code-plugin --owner desearch-ai --source-repo "$SOURCE_REPO" --source-commit "$SOURCE_COMMIT" --dry-run
 ```
 
-The dry run creates no release. Publication requires an authorized `desearch` publisher matching the package scope, source repository and commit metadata, and review of the exact package.
+The dry run creates no release. Publication requires an authorized `desearch-ai` publisher matching the package scope, source repository and commit metadata, and review of the exact package.
 
 SDK and registry references: [building plugins](https://docs.openclaw.ai/plugins/building-plugins), [provider media and search](https://docs.openclaw.ai/plugins/sdk-provider-plugins/media-and-search), [package metadata](https://docs.openclaw.ai/plugins/sdk-setup), [ClawHub publishing](https://docs.openclaw.ai/clawhub/publishing).
