@@ -13,17 +13,17 @@ Use Desearch as OpenClaw's `web_search` provider. This plugin forwards searches 
 After the package is published, install the exact version from either registry:
 
 ```sh
-openclaw plugins install npm:@desearch/openclaw-plugin@0.1.0
+openclaw plugins install npm:@desearch/openclaw-plugin@0.1.0 --accept-capabilities
 ```
 
 ```sh
-openclaw plugins install clawhub:@desearch/openclaw-plugin@0.1.0
+openclaw plugins install clawhub:@desearch/openclaw-plugin@0.1.0 --accept-capabilities
 ```
 
 For a local reviewed tarball:
 
 ```sh
-openclaw plugins install npm-pack:./desearch-openclaw-plugin-0.1.0.tgz --force
+openclaw plugins install npm-pack:./desearch-openclaw-plugin-0.1.0.tgz --force --accept-capabilities
 ```
 
 Enable the plugin and select the provider:
@@ -82,11 +82,11 @@ npm run smoke
 
 The smoke script runs the registered provider against the live MCP service, then verifies that a randomly generated invalid key fails without leaking into output. Tests cover registration, mapping, count bounds, input rejection, missing credentials, malformed and failed upstream replies, cancellation, stale callers, and credential configuration hooks.
 
-Validate the package with ClawHub CLI 0.27.0 before publishing:
+Validate the package with ClawHub CLI 0.27.0 before publishing. Set `SOURCE_REPO` to the public source repository URL and `SOURCE_COMMIT` to its exact reviewed commit SHA before running the dry run:
 
 ```sh
 clawhub package validate .
-clawhub package publish ../artifacts/desearch-openclaw-plugin-0.1.0.tgz --family code-plugin --owner desearch --dry-run
+clawhub package publish ../artifacts/desearch-openclaw-plugin-0.1.0.tgz --family code-plugin --owner desearch --source-repo "$SOURCE_REPO" --source-commit "$SOURCE_COMMIT" --dry-run
 ```
 
 The dry run creates no release. Publication requires an authorized `desearch` publisher matching the package scope, source repository and commit metadata, and review of the exact package.
