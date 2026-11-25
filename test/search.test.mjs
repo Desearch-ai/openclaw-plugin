@@ -20,6 +20,8 @@ test('maps MCP web results, filters invalid URLs, and limits count', async () =>
   assert.equal(output.count, 1);
   assert.equal(output.results[0].url, 'https://example.com');
   assert.equal(output.externalContent.untrusted, true);
+  assert.match(output.results[0].title, /EXTERNAL_UNTRUSTED_CONTENT/);
+  assert.match(output.results[0].snippet, /EXTERNAL_UNTRUSTED_CONTENT/);
 });
 test('supports empty results without inventing matches', () => assert.deepEqual(parseResults(reply([]), 5), []));
 test('rejects invalid input before calling MCP', async () => {
