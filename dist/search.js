@@ -1,3 +1,4 @@
+import { wrapWebContent } from 'openclaw/plugin-sdk/security-runtime';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 export const MCP_URL = 'https://mcp.desearch.ai/mcp';
@@ -62,7 +63,7 @@ export async function search(args, apiKey, context, call = callWebSearch) {
         const reply = await call(args.query.trim(), apiKey, signal);
         context?.signal?.throwIfAborted();
         context?.assertCurrent?.();
-        const results = parseResults(reply, count);
+        const results = parseResults(reply, count).map(row => ({ ...row, title: wrapWebContent(row.title, 'web_search'), ...(row.snippet === undefined ? {} : { snippet: wrapWebContent(row.snippet, 'web_search') }) }));
         return { kind: 'results', provider: 'desearch', query: args.query.trim(), count: results.length, results,
             externalContent: { untrusted: true, source: 'web_search', wrapped: true, provider: 'desearch' } };
     }
